@@ -1,0 +1,53 @@
+<odoo>
+    <data>
+        <record id="contacts_patients_infos" model="ir.ui.view">
+            <field name="name">contacts.new.add.extension</field>
+            <field name="model">res.partner</field>
+            <field name="inherit_id" ref="base.view_partner_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='vat']" position="after">
+                    <field name="is_patient"/>
+                </xpath>
+            </field>
+        </record>
+        <record id="my_hospital.action_hospital_patients" model="ir.actions.act_window">
+            <field name="name">Patients</field>
+            <field name="res_model">res.partner</field>
+            <field name="view_mode">tree,form,kanban</field>
+            <field name="domain">[('is_patient','=',True)]</field>
+            <field name="help" type="html">
+                <p class="o_view_nocontent_smilling_face">
+                    Add new patients
+                </p>
+            </field>
+        </record>
+
+        <menuitem id="hospital_root" name="Hospital" sequence="0" />
+        <menuitem id="hospital_ressources" name="Ressources" parent="hospital_root" sequence="0" />
+        <menuitem id="hospital_doctors"
+                  name="Doctors"
+                  sequence="1"
+                  parent="hospital_ressources"
+                  action="my_hospital.action_hospital_doctors"
+        />
+        <menuitem id="hospital_patient"
+                  name="Patients"
+                  sequence="1"
+                  parent="hospital_ressources"
+                  action="my_hospital.action_hospital_patients"
+        />
+        <menuitem id="hospital_transactions"
+                  name="Transactions"
+                  sequence="1"
+                  parent="hospital_root"
+        />
+
+        <menuitem id="hospital_appointments"
+                  name="Appointments"
+                  sequence="1"
+                  parent="hospital_transactions"
+                  action="my_hospital.action_hospital_patients"
+        />
+
+    </data>
+</odoo>
