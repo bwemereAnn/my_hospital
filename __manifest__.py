@@ -5,7 +5,8 @@
     'summary': "Product for hospitals and patients",
 
     'description': """
-        using this module for complete manage your hospitak and get good reports
+        using this module for complete manage your hospital and get good 
+        reports
     """,
 
     'author': "annette",
@@ -22,11 +23,12 @@
 
     # always loaded
     'data': [
-        # 'security/ir.model.access.csv',
+        'security/ir.model.access.csv',
         'views/views.xml',
         'views/doctors.xml',
         'views/templates.xml',
-
+        'views/appointments.xml',
+        'views/menu.xml',
     ],
 
 }
