@@ -56,6 +56,9 @@ class TheAppointments(models.Model):
         ('done', 'Done'),
         ('cancel', 'Cancelled'),
     ], 'Status', default='draft', readonly=True)
+    doctors_notes = fields.Text(string='Doctors Notes')
+    doctor_id = fields.Many2one('res.users',string='Doctor', domain=[('is_doctor', '=', True)])
+    prescriptions_ids = fields.Many2many('the.prescriptions', "prescriptions_id",)
 
 
     def action_confirm(self):
@@ -64,6 +67,10 @@ class TheAppointments(models.Model):
     def action_done(self):
         self.write({'state': 'done'})
 
+
+    def action_cancel(self):
+        self.write({'state': 'cancel'})
+
     @api.model
     def create(self, vals):
         if vals.get('name', _('New')) == _('New'):
@@ -71,3 +78,12 @@ class TheAppointments(models.Model):
                 'the.appointments.sequence') or _('New')
         result = super(TheAppointments, self).create(vals)
         return result
+
+
+class Prescriptions(models.Model):
+    _name = 'the.prescriptions'
+    _description = 'Prescriptions of an hospital'
+
+    name = fields.Char(string='Medecine name')
+    notes = fields.Text(string='Notes')
+    appointment_id = fields.Many2one('the.appointments', string='Appointments')

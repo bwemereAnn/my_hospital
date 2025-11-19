@@ -1,2 +1,4 @@
 id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
 my_hospital.access_the_appointments,access_the_appointments,my_hospital.model_the_appointments,base.group_user,1,1,1,1
+my_hospital.access_the_prescriptions,access_the_prescriptions,my_hospital.model_the_prescriptions,base.group_user,1,0,0,0
+
